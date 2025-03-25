@@ -53,8 +53,8 @@ module Definition =
         Pattern.Config "CookieChangeOptions" {
             Required = []
             Optional = [
-                "changed", !| CookieStoreOptions // Array of changed cookies
-                "deleted", !| CookieStoreOptions // Array of deleted cookies
+                "changed", !| CookieStoreOptions 
+                "deleted", !| CookieStoreOptions 
             ]
         }
 
@@ -76,8 +76,8 @@ module Definition =
             Constructor (!?T<string>?``type`` * !?CookieChangeOptions?options)
         ]
         |+> Instance [
-            "changed" =? !| CookieStoreOptions // Returns an array containing the changed cookies
-            "deleted" =? !| CookieStoreOptions // Returns an array containing the deleted cookies
+            "changed" =? !| CookieStoreOptions 
+            "deleted" =? !| CookieStoreOptions 
         ]
     
     let CookieStore =
@@ -99,29 +99,22 @@ module Definition =
         Pattern.Config "Subscriptions" {
             Required = []
             Optional = [
-                "name", T<string> // Array of changed cookies
-                "url", T<string> // Array of deleted cookies
+                "name", T<string> 
+                "url", T<string> 
             ]
         }
     
     let CookieStoreManager =
         Class "CookieStoreManager"
         |+> Instance [
-            "getSubscriptions" => T<unit> ^-> T<Promise<_>>[Subscriptions] // Returns a Promise resolving to a list of subscriptions
-            "subscribe" => Subscriptions?subscriptions ^-> T<Promise<unit>> // Subscribes the service worker
-            "unsubscribe" => Subscriptions?subscriptions ^-> T<Promise<unit>> // Unsubscribes the service worker
-        ]
-
-    let Window = 
-        Class "Window"
-        |+> Instance [
-            "cookieStore" =? CookieStore
+            "getSubscriptions" => T<unit> ^-> T<Promise<_>>[Subscriptions] 
+            "subscribe" => Subscriptions?subscriptions ^-> T<Promise<unit>> 
+            "unsubscribe" => Subscriptions?subscriptions ^-> T<Promise<unit>> 
         ]
 
     let Assembly =
         Assembly [
-            Namespace "WebSharper.CookieStore" [
-                Window
+            Namespace "WebSharper.CookieStore" [                
                 CookieStoreManager
                 Subscriptions
                 CookieStore

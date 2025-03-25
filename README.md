@@ -75,7 +75,7 @@ module Client =
     type IndexTemplate = Template<"wwwroot/index.html", ClientLoad.FromDocument>
 
     let statusMessage = Var.Create "No cookie set."
-    let cookieStore = As<Window>(JS.Window).CookieStore
+    let cookieStore = JS.Window.CookieStore
 
     // Function to set a cookie
     let setCookie() = promise {

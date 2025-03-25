@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.CookieStore", "WebSharper.CookieStore\WebSharper.CookieStore.fsproj", "{43FEFADE-D026-49D9-8EA1-E06FA1BE2F3C}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.CookieStore.Sample", "WebSharper.CookieStore.Sample\WebSharper.CookieStore.Sample.fsproj", "{C97C7BD2-76D4-43D6-8CDB-DF915F2DC34F}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.CookieStore.Extensions", "WebSharper.CookieStore.Extensions\WebSharper.CookieStore.Extensions.fsproj", "{A798A691-642D-4541-B579-E33EFA1F0BF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{C97C7BD2-76D4-43D6-8CDB-DF915F2DC34F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C97C7BD2-76D4-43D6-8CDB-DF915F2DC34F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C97C7BD2-76D4-43D6-8CDB-DF915F2DC34F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A798A691-642D-4541-B579-E33EFA1F0BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A798A691-642D-4541-B579-E33EFA1F0BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A798A691-642D-4541-B579-E33EFA1F0BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A798A691-642D-4541-B579-E33EFA1F0BF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {424AAF31-C157-46FD-8DC9-0A99915F10E6}
 	EndGlobalSection
 EndGlobal
