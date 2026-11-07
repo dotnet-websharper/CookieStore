@@ -8,6 +8,12 @@ The Cookie Store API is [Baseline 2025](https://developer.mozilla.org/en-US/docs
 
 ## Live demos
 
+**Try it live:** [Open the sample in your browser](https://dotnet-websharper.github.io/CookieStore/)
+
+![Cookie Store API sample](docs/sample.png)
+
+The sample doubles as the binding's [test case](#run-the-sample): it sets, reads, lists and deletes cookies through the asynchronous API.
+
 - [Sample on GitHub Pages](https://dotnet-websharper.github.io/CookieStore/)
 - [Source repository](https://github.com/dotnet-websharper/CookieStore)
 - [WebSharper bindings](https://websharper.com/bindings)
