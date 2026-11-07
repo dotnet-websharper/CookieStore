@@ -43,8 +43,8 @@ The sample (`WebSharper.CookieStore.Sample/Client.fs`) is a complete WebSharper.
 version using `Var`s and template holes. Its core operations are:
 
 ```fsharp
-// Set a cookie. Use the options object to pass expires/maxAge:
-// set(name, value, options) ignores its third argument in the browser API.
+// Set a cookie. The API accepts set(name, value) or set(options); use the
+// options object form to set expires/maxAge.
 do! cookieStore.Set(
         CookieStoreSetOptions(
             "username",

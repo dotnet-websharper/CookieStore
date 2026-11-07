@@ -24,9 +24,9 @@ module Client =
 
     let cookieStore = JS.Window.CookieStore
 
-    // Set a cookie from the current input values. The options object form is
-    // required for expires/maxAge: set(name, value, options) ignores its third
-    // argument in the Cookie Store API.
+    // Set a cookie from the current input values. The Cookie Store API accepts
+    // set(name, value) or set(options); use the options object form to set
+    // expires/maxAge.
     let setCookie () =
         promise {
             try
