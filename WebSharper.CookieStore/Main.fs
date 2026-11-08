@@ -18,13 +18,50 @@ module Definition =
         Pattern.Config "CookieStoreOptions" {
             Required = []
             Optional = [
-                "name", T<string>  
-                "value", T<string> 
-                "path", T<string>  
-                "expires", T<float> 
-                "domain", T<string> 
-                "sameSite", T<string> 
-                "secure", T<bool>   
+                "name", T<string>
+                "value", T<string>
+                "path", T<string>
+                "expires", T<float>
+                "domain", T<string>
+                "sameSite", T<string>
+                "secure", T<bool>
+                "partitioned", T<bool>
+                "maxAge", T<float>
+            ]
+        }
+
+    // The options dictionary accepted by set(options), matching MDN's CookieStoreSetOptions
+    // (the CookieInit dictionary in the WHATWG IDL). name and value are required.
+    let CookieStoreSetOptions =
+        Pattern.Config "CookieStoreSetOptions" {
+            Required = [
+                "name", T<string>
+                "value", T<string>
+            ]
+            Optional = [
+                "path", T<string>
+                "expires", T<float>
+                "domain", T<string>
+                "sameSite", T<string>
+                "secure", T<bool>
+                "partitioned", T<bool>
+                "maxAge", T<float>
+            ]
+        }
+
+    // The object returned by get() and getAll(). The spec only guarantees name and value;
+    // MDN documents the remaining fields as non-standard but present in browsers.
+    let CookieListItem =
+        Pattern.Config "CookieListItem" {
+            Required = []
+            Optional = [
+                "name", T<string>
+                "value", T<string>
+                "path", T<string>
+                "expires", T<float>
+                "domain", T<string>
+                "sameSite", T<string>
+                "secure", T<bool>
                 "partitioned", T<bool>
             ]
         }
@@ -42,19 +79,19 @@ module Definition =
 
     let CookieStoreGetOptions = 
         Pattern.Config "CookieStoreGetOptions" {
-            Required = [
+            Required = []
+            Optional = [
                 "name", T<string>
                 "url", T<string>
             ]
-            Optional = []
         }
 
     let CookieChangeOptions =
         Pattern.Config "CookieChangeOptions" {
             Required = []
             Optional = [
-                "changed", !| CookieStoreOptions 
-                "deleted", !| CookieStoreOptions 
+                "changed", !| CookieListItem
+                "deleted", !| CookieListItem
             ]
         }
 
@@ -65,8 +102,8 @@ module Definition =
             Constructor (!?T<string>?``type`` * !?CookieChangeOptions?options)
         ]
         |+> Instance [
-            "changed" =? !| CookieStoreOptions  
-            "deleted" =? !| CookieStoreOptions 
+            "changed" =? !| CookieListItem
+            "deleted" =? !| CookieListItem
         ]
 
     let ExtendableCookieChangeEvent =
@@ -76,18 +113,29 @@ module Definition =
             Constructor (!?T<string>?``type`` * !?CookieChangeOptions?options)
         ]
         |+> Instance [
-            "changed" =? !| CookieStoreOptions 
-            "deleted" =? !| CookieStoreOptions 
+            "changed" =? !| CookieListItem
+            "deleted" =? !| CookieListItem
         ]
     
     let CookieStore =
         Class "CookieStore"
         |=> Inherits T<Dom.EventTarget>
         |+> Instance [
-            "get" => !?T<string>?name * !?CookieStoreGetOptions?options ^-> T<Promise<_>>[CookieStoreOptions]
-            "set" => !?T<string>?name * !?T<string>?value * !?CookieStoreOptions?options ^-> T<Promise<unit>>
-            "delete" => !?T<string>?name * !?CookieStoreDeleteOptions?options ^-> T<Promise<unit>>
-            "getAll" => !?T<string>?name * !?CookieStoreGetOptions?options ^-> T<Promise<_>>[!|CookieStoreOptions]
+            // get(name) / get(options): resolves with a single cookie or null.
+            "get" => T<string>?name ^-> T<Promise<_>>[CookieListItem]
+            "get" => !?CookieStoreGetOptions?options ^-> T<Promise<_>>[CookieListItem]
+
+            // set(name, value) / set(options)
+            "set" => T<string>?name * T<string>?value ^-> T<Promise<unit>>
+            "set" => CookieStoreSetOptions?options ^-> T<Promise<unit>>
+
+            // delete(name) / delete(options)
+            "delete" => T<string>?name ^-> T<Promise<unit>>
+            "delete" => CookieStoreDeleteOptions?options ^-> T<Promise<unit>>
+
+            // getAll(name) / getAll(options): resolves with an array of cookies.
+            "getAll" => T<string>?name ^-> T<Promise<_>>[!|CookieListItem]
+            "getAll" => !?CookieStoreGetOptions?options ^-> T<Promise<_>>[!|CookieListItem]
 
             "onchange" =@ T<unit> ^-> T<unit>
             |> ObsoleteWithMessage "Use OnChange instead"
@@ -114,7 +162,7 @@ module Definition =
 
     let Assembly =
         Assembly [
-            Namespace "WebSharper.CookieStore" [                
+            Namespace "WebSharper.CookieStore" [
                 CookieStoreManager
                 Subscriptions
                 CookieStore
@@ -124,6 +172,8 @@ module Definition =
                 CookieStoreGetOptions
                 CookieStoreDeleteOptions
                 CookieStoreOptions
+                CookieStoreSetOptions
+                CookieListItem
                 Enum.SameSite
             ]
         ]

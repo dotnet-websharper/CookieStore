@@ -14,11 +14,19 @@
 <body>
     <h1>Cookie Store API Demo</h1>
     <div id="main" ws-children-template="Main">
-        <button ws-onclick="setCookie">Set Cookie</button>
-        <button ws-onclick="getCookie">Get Cookie</button>
-        <button ws-onclick="deleteCookie">Delete Cookie</button>
+        <p>
+            <input type="text" id="nameInput" placeholder="Cookie name" ws-var="nameInput" />
+            <input type="text" id="valueInput" placeholder="Cookie value" ws-var="valueInput" />
+        </p>
+        <p>
+            <button ws-onclick="setCookie">Set Cookie</button>
+            <button ws-onclick="getCookie">Get Cookie</button>
+            <button ws-onclick="deleteCookie">Delete Cookie</button>
+            <button ws-onclick="getAllCookies">List All Cookies</button>
+        </p>
 
         <p id="status">${Status}</p>
+        <ul id="cookies" ws-hole="Cookies"></ul>
     </div>
     <script type="module" src="Content/WebSharper.CookieStore.Sample.min.js"></script>
 </body>
