@@ -82,9 +82,9 @@ function setCookie(){
         statusMessage().Set("Cookie Set: "+nameInput().Get()+"="+valueInput().Get());
         return Promise.resolve(null);
       }));
-    })["catch"]((d) => {
-      const a=unwrapExn(d);
-      statusMessage().Set("Set failed: "+a.message);
+    })["catch"]((a) => {
+      const a_1=unwrapExn(a);
+      statusMessage().Set("Set failed: "+a_1.message);
       return Promise.resolve(null);
     }));
   });
@@ -92,10 +92,10 @@ function setCookie(){
 function getCookie(){
   return new Promise((_1) => {
     _1(new Promise((_2) => {
-      _2(cookieStore().get(nameInput().Get()).then((d) => d==null?(statusMessage().Set("No cookie found!"),Promise.resolve(null)):(statusMessage().Set("Cookie Found: "+d.name+"="+d.value),Promise.resolve(null))));
-    })["catch"]((d) => {
-      const a=unwrapExn(d);
-      statusMessage().Set("Get failed: "+a.message);
+      _2(cookieStore().get(nameInput().Get()).then((a) => a==null?(statusMessage().Set("No cookie found!"),Promise.resolve(null)):(statusMessage().Set("Cookie Found: "+a.name+"="+a.value),Promise.resolve(null))));
+    })["catch"]((a) => {
+      const a_1=unwrapExn(a);
+      statusMessage().Set("Get failed: "+a_1.message);
       return Promise.resolve(null);
     }));
   });
@@ -107,9 +107,9 @@ function deleteCookie(){
         statusMessage().Set("Cookie Deleted!");
         return Promise.resolve(null);
       }));
-    })["catch"]((d) => {
-      const a=unwrapExn(d);
-      statusMessage().Set("Delete failed: "+a.message);
+    })["catch"]((a) => {
+      const a_1=unwrapExn(a);
+      statusMessage().Set("Delete failed: "+a_1.message);
       return Promise.resolve(null);
     }));
   });
@@ -117,14 +117,14 @@ function deleteCookie(){
 function getAllCookies(){
   return new Promise((_1) => {
     _1(new Promise((_2) => {
-      _2(cookieStore().getAll().then((d) => {
-        cookies().Set(ofArray(d));
-        statusMessage().Set("Found "+String(length(d))+" cookie(s).");
+      _2(cookieStore().getAll().then((a) => {
+        cookies().Set(ofArray(a));
+        statusMessage().Set("Found "+String(length(a))+" cookie(s).");
         return Promise.resolve(null);
       }));
-    })["catch"]((d) => {
-      const a=unwrapExn(d);
-      statusMessage().Set("GetAll failed: "+a.message);
+    })["catch"]((a) => {
+      const a_1=unwrapExn(a);
+      statusMessage().Set("GetAll failed: "+a_1.message);
       return Promise.resolve(null);
     }));
   });
@@ -851,7 +851,7 @@ class Attr {
   }
   static HandlerImpl(event, q){
     return Attr.A3((el) => {
-      el.addEventListener(event, (d) =>(q(el))(d), false);
+      el.addEventListener(event, (o) =>(q(el))(o), false);
     });
   }
   static Create(name, value){
@@ -3780,7 +3780,7 @@ class Event extends TemplateHole {
 }
 function Handler(name, callback){
   return Attr.A3((el) => {
-    el.addEventListener(name, (d) =>(callback(el))(d), false);
+    el.addEventListener(name, (o) =>(callback(el))(o), false);
   });
 }
 function OnAfterRender(callback){
