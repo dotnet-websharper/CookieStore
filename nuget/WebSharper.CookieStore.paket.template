@@ -15,8 +15,10 @@ tags
     Web JavaScript F# C#
 files
     ../WebSharper.CookieStore.Extensions/bin/Release/netstandard2.0/WebSharper.CookieStore.Extensions.dll ==> lib/netstandard2.0
+    ../WebSharper.CookieStore.Extensions/bin/Release/netstandard2.0/WebSharper.CookieStore.Extensions.websharper ==> lib/netstandard2.0
     ../WebSharper.CookieStore.Extensions/bin/Release/netstandard2.0/WebSharper.CookieStore.Extensions.xml ==> lib/netstandard2.0
     ../WebSharper.CookieStore/bin/Release/netstandard2.0/WebSharper.CookieStore.dll ==> lib/netstandard2.0
+    ../WebSharper.CookieStore/bin/Release/netstandard2.0/WebSharper.CookieStore.websharper ==> lib/netstandard2.0
     ../WebSharper.CookieStore/bin/Release/netstandard2.0/WebSharper.CookieStore.xml ==> lib/netstandard2.0
 dependencies
         WebSharper ~> LOCKEDVERSION:[3]
